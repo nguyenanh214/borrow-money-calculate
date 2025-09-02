@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Báo cáo vay nhiều nguồn</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .money {
+            font-weight: 600;
+        }
+
+        .small-muted {
+            font-size: .85rem;
+            color: #6c757d;
+        }
+
+        .card {
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        .card-title {
+            color: #495057;
+            font-weight: 600;
+        }
+
+        .btn {
+            border-radius: 6px;
+        }
+
+        .table th {
+            background-color: #f8f9fa;
+            border-color: #dee2e6;
+            font-weight: 600;
+        }
+
+        .alert-info {
+            background-color: #e7f3ff;
+            border-color: #b8daff;
+            color: #0c5460;
+        }
+
+        pre.json-input {
+            max-height: 200px;
+            overflow: auto;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .table-fixed {
+            table-layout: fixed;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3 class="mb-3">Báo cáo vay nhiều nguồn — HTML demo (Bootstrap)</h3>
+
+        <div class="row g-3">
+            <div class="col-lg-5">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">Dữ liệu nguồn vay (JSON)</h5>
+                        <p class="small-muted">Chỉnh sửa dữ liệu dưới đây để thay bằng thông tin thực của bạn.<br>
+                        <strong>Các trường bắt buộc:</strong> tenNguonTienVay, ngayBatDauVay, loaiVay<br>
+                        <strong>Loại vay:</strong> "hang_thang" (trả từng tháng) hoặc "mot_lan" (trả một lần)<br>
+                        <strong>Nếu loaiVay = "hang_thang":</strong><br>
+                        &nbsp;&nbsp;• <strong>Cách 1:</strong> ngayPhaiTraTienTrongThang, tongSoTienVay, vayTrongBaoNhieuThang, moiThangCanTra<br>
+                        &nbsp;&nbsp;• <strong>Cách 2:</strong> ngayPhaiTraTienTrongThang, ngayKetThucVay, soTienConLai, moiThangCanTra<br>
+                        <strong>Nếu loaiVay = "mot_lan":</strong> ngayPhaiTra, soTienPhaiTra</p>
+                        <pre id="jsonInput" class="json-input">
+[
+    {
+        "tenNguonTienVay": "Sacombank",
+        "ngayBatDauVay": "2025-06-04",
+        "soTienConLai": 20000000,
+        "loaiVay": "hang_thang",
+        "ngayPhaiTraTienTrongThang": 22,
+        "ngayKetThucVay": "2026-07-22",
+        "moiThangCanTra": 2100000,
+        "ghiChu": "trả hàng tháng"
+    },
+    {
+        "tenNguonTienVay": "Tin vay",
+        "ngayBatDauVay": "2025-07-11",
+        "soTienConLai": 8175000,
+        "loaiVay": "hang_thang",
+        "ngayPhaiTraTienTrongThang": 11,
+        "ngayKetThucVay": "2026-04-11",
+        "moiThangCanTra": 1214000,
+        "ghiChu": "trả hàng tháng"
+    },
+    {
+        "tenNguonTienVay": "Cake",
+        "ngayBatDauVay": "2025-08-25",
+        "loaiVay": "mot_lan",
+        "ngayPhaiTra": "2025-10-09",
+        "soTienPhaiTra": 6000000,
+        "ghiChu": "trả một lần"
+    },
+    {
+        "tenNguonTienVay": "Vay trả góp đt 1",
+        "ngayBatDauVay": "2025-05-18",
+        "soTienConLai": 4167000,
+        "loaiVay": "hang_thang",
+        "ngayPhaiTraTienTrongThang": 18,
+        "ngayKetThucVay": "2026-05-18",
+        "moiThangCanTra": 566000,
+        "ghiChu": "trả hàng tháng"
+    },
+    {
+        "tenNguonTienVay": "Vay trả góp đt 2",
+        "ngayBatDauVay": "2025-05-18",
+        "soTienConLai": 4500000,
+        "loaiVay": "hang_thang",
+        "ngayPhaiTraTienTrongThang": 18,
+        "ngayKetThucVay": "2026-05-18",
+        "moiThangCanTra": 900000,
+        "ghiChu": "trả hàng tháng"
+    },
+    {
+        "tenNguonTienVay": "Tnext 1",
+        "ngayBatDauVay": "2025-07-18",
+        "soTienConLai": 5300000,
+        "loaiVay": "hang_thang",
+        "ngayPhaiTraTienTrongThang": 18,
+        "ngayKetThucVay": "2026-01-19",
+        "moiThangCanTra": 1030000,
+        "ghiChu": "trả hàng tháng"
+    },
+    {
+        "tenNguonTienVay": "Tnext 2",
+        "ngayBatDauVay": "2025-06-05",
+        "loaiVay": "mot_lan",
+        "ngayPhaiTra": "2025-09-05",
+        "soTienPhaiTra": 1940000,
+        "ghiChu": "trả một lần"
+    },
+    {
+        "tenNguonTienVay": "TPbank",
+        "ngayBatDauVay": "2025-08-25",
+        "soTienConLai": 4202096,
+        "loaiVay": "hang_thang",
+        "ngayPhaiTraTienTrongThang": 25,
+        "ngayKetThucVay": "2025-11-25",
+        "moiThangCanTra": 1400000,
+        "ghiChu": "trả hàng tháng"
+    }
+]
+                        </pre>
+                        <div class="d-flex gap-2">
+                            <button id="btnLoad" class="btn btn-primary btn-sm">Tải dữ liệu và tính toán</button>
+                            <button id="btnUseSample" class="btn btn-outline-secondary btn-sm">Khôi phục mẫu</button>
+                            <button id="btnPaste" class="btn btn-outline-secondary btn-sm">Dán JSON</button>
+                            <button id="btnDownloadAllCSV" class="btn btn-success btn-sm ms-auto">Tải xuống CSV</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="summaryCard" class="card d-none">
+                    <div class="card-body">
+                        <h5 class="card-title">Tổng quan các khoản vay</h5>
+                        <div id="loansSummary"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-7">
+                <div id="combinedCard" class="card d-none">
+                    <div class="card-body">
+                        <h5 class="card-title">Timeline thanh toán (sắp xếp từ gần đến xa)</h5>
+                        <div class="table-responsive" style="max-height:420px; overflow:auto;">
+                            <table id="combinedTable" class="table table-sm table-striped table-bordered table-fixed">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th style="width:120px">Ngày trả</th>
+                                        <th style="width:150px">Nguồn tiền</th>
+                                        <th class="text-end" style="width:120px">Số tiền (VND)</th>
+                                        <th class="text-end" style="width:120px">Còn lại (VND)</th>
+                                        <th style="width:80px">Kỳ</th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="amortizationsCard" class="card mt-3 d-none">
+                    <div class="card-body">
+                        <h5 class="card-title">Chi tiết lịch trả nợ (mở rộng theo khoản)</h5>
+                        <div id="accordionLoans"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        <div class="small-muted mb-3">
+            Ghi chú: Ứng dụng tính toán timeline thanh toán các khoản vay dựa trên số tiền trả hàng tháng đã định sẵn. 
+            Timeline được sắp xếp từ gần nhất đến xa nhất theo ngày phải trả tiền.
+        </div>
+    </div>
+
+    <script>
+        /*
+  Author: generated by assistant
+  Purpose: Take an array of loan objects and produce:
+    - Timeline of payments sorted by due date (nearest to furthest)
+    - Per-loan payment schedule
+    - Combined monthly totals across loans
+  Expected loan object fields:
+    tenNguonTienVay (string), ngayBatDauVay (YYYY-MM-DD), ngayPhaiTraTienTrongThang (number 1-31),
+    tongSoTienVay (number), vayTrongBaoNhieuThang (integer), moiThangCanTra (number), ghiChu (string optional)
+*/
+
+        (function () {
+            // --- Helpers ---
+            function fmtMoney(v) {
+                return new Intl.NumberFormat('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                    maximumFractionDigits: 0
+                }).format(Math.round(v));
+            }
+
+            function monthKeyFromDate(d) { // Date -> YYYY-MM
+                const y = d.getFullYear();
+                const m = String(d.getMonth() + 1).padStart(2, '0');
+                return `${y}-${m}`;
+            }
+
+            function addMonths(date, months) {
+                const d = new Date(date.getTime());
+                const day = d.getDate();
+                d.setMonth(d.getMonth() + months);
+                // Fix for month overflow (e.g. Jan 31 + 1 month -> Mar 3); adjust to last day if passed
+                if (d.getDate() !== day) {
+                    d.setDate(0); // last day of previous month
+                }
+                return d;
+            }
+
+            function isoToDate(s) {
+                // s: "YYYY-MM-DD" or Date object
+                if (s instanceof Date) return new Date(s.getFullYear(), s.getMonth(), s.getDate());
+                const parts = ('' + s).split('-').map(Number);
+                return new Date(parts[0], parts[1] - 1, parts[2] || 1);
+            }
+
+            function calcMonthlyPayment(P, monthlyRateDecimal, n) {
+                if (n <= 0) return 0;
+                const r = monthlyRateDecimal;
+                if (Math.abs(r) < 1e-12) return P / n;
+                const denom = 1 - Math.pow(1 + r, -n);
+                return (r * P) / denom;
+            }
+
+            function generatePaymentSchedule(totalAmount, monthlyPayment, months, startDate, paymentDay) {
+                // returns array of {period, date, payment, remainingAmount}
+                const schedule = [];
+                let remainingAmount = totalAmount;
+                
+                for (let k = 1; k <= months; k++) {
+                    // Tính ngày trả tiền cho kỳ này
+                    const paymentDate = addMonths(startDate, k - 1);
+                    paymentDate.setDate(paymentDay);
+                    
+                    // Kỳ cuối cùng trả hết số còn lại
+                    let payment = monthlyPayment;
+                    if (k === months) {
+                        payment = remainingAmount;
+                    }
+                    
+                    remainingAmount -= payment;
+                    if (remainingAmount < 0) remainingAmount = 0;
+                    
+                    schedule.push({
+                        period: k,
+                        date: paymentDate,
+                        payment: payment,
+                        remainingAmount: remainingAmount
+                    });
+                    
+                    if (remainingAmount <= 0) break;
+                }
+                return schedule;
+            }
+
+            function generateRemainingPaymentSchedule(remainingAmount, monthlyPayment, startDate, paymentDay, endDate) {
+                // returns array of {period, date, payment, remainingAmount}
+                // Tạo schedule dựa trên số tiền còn lại, bắt đầu từ tháng tiếp theo
+                const schedule = [];
+                let currentAmount = remainingAmount;
+                let period = 1;
+                
+                // Bắt đầu từ tháng tiếp theo
+                let currentDate = new Date(startDate);
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                currentDate.setDate(paymentDay);
+                
+                while (currentAmount > 0 && currentDate <= endDate) {
+                    let payment = monthlyPayment;
+                    
+                    // Nếu số tiền còn lại ít hơn số tiền trả hàng tháng thì trả hết
+                    if (currentAmount < monthlyPayment) {
+                        payment = currentAmount;
+                    }
+                    
+                    currentAmount -= payment;
+                    if (currentAmount < 0) currentAmount = 0;
+                    
+                    schedule.push({
+                        period: period,
+                        date: new Date(currentDate),
+                        payment: payment,
+                        remainingAmount: currentAmount
+                    });
+                    
+                    period++;
+                    currentDate.setMonth(currentDate.getMonth() + 1);
+                    
+                    if (currentAmount <= 0) break;
+                }
+                
+                return schedule;
+            }
+
+            // --- DOM elements ---
+            const jsonInputEl = document.getElementById('jsonInput');
+            const btnLoad = document.getElementById('btnLoad');
+            const btnUseSample = document.getElementById('btnUseSample');
+            const btnPaste = document.getElementById('btnPaste');
+            const btnDownloadAllCSV = document.getElementById('btnDownloadAllCSV');
+            const summaryCard = document.getElementById('summaryCard');
+            const loansSummary = document.getElementById('loansSummary');
+            const combinedCard = document.getElementById('combinedCard');
+            const combinedTableBody = document.querySelector('#combinedTable tbody');
+            const amortizationsCard = document.getElementById('amortizationsCard');
+            const accordionLoans = document.getElementById('accordionLoans');
+
+            function getLoansFromInput() {
+                try {
+                    const txt = jsonInputEl.textContent.trim();
+                    const arr = JSON.parse(txt);
+                    if (!Array.isArray(arr)) throw new Error('Not array');
+                    return arr;
+                } catch (err) {
+                    alert('❌ Dữ liệu JSON không hợp lệ: ' + err.message + '\n\nVui lòng kiểm tra lại định dạng JSON.');
+                    throw err;
+                }
+            }
+
+            function render(loans) {
+                // Normalize and compute for each loan
+                const processed = loans.map(l => {
+                    let totalAmount = Number(l.tongSoTienVay || 0); // Thay đổi từ const thành let
+                    const startDate = isoToDate(l.ngayBatDauVay || new Date());
+                    const source = l.tenNguonTienVay || 'Unknown';
+                    const note = l.ghiChu || '';
+                    const loanType = l.loaiVay || 'hang_thang';
+                    
+                    let schedule, totalPayment, endDate, paymentDay, monthlyPayment, months;
+                    
+                    if (loanType === 'mot_lan') {
+                        // Trả một lần
+                        const dueDate = isoToDate(l.ngayPhaiTra || addMonths(startDate, 1));
+                        const amountToPay = Number(l.soTienPhaiTra || totalAmount);
+                        
+                        schedule = [{
+                            period: 1,
+                            date: dueDate,
+                            payment: amountToPay,
+                            remainingAmount: 0
+                        }];
+                        
+                        totalPayment = amountToPay;
+                        endDate = dueDate;
+                        paymentDay = dueDate.getDate();
+                        monthlyPayment = 0; // Không có trả hàng tháng
+                        months = 1;
+                    } else {
+                        // Trả từng tháng
+                        monthlyPayment = Number(l.moiThangCanTra || 0);
+                        paymentDay = parseInt(l.ngayPhaiTraTienTrongThang || 1, 10);
+                        
+                        // Kiểm tra cách nhập liệu: Cách 1 (tổng tiền + số tháng) hoặc Cách 2 (số tiền còn lại + ngày kết thúc)
+                        if (l.soTienConLai && l.ngayKetThucVay) {
+                            // Cách 2: Biết số tiền còn lại và ngày kết thúc
+                            const remainingAmount = Number(l.soTienConLai);
+                            const endDateInput = isoToDate(l.ngayKetThucVay);
+                            
+                            // Tính số tháng còn lại dựa trên số tiền còn lại
+                            months = Math.ceil(remainingAmount / monthlyPayment);
+                            
+                            // Tạo schedule từ hiện tại đến khi hết nợ
+                            schedule = generateRemainingPaymentSchedule(remainingAmount, monthlyPayment, startDate, paymentDay, endDateInput);
+                            totalAmount = remainingAmount; // Bây giờ có thể gán lại vì đã là let
+                            endDate = schedule.length ? schedule[schedule.length - 1].date : endDateInput;
+                        } else {
+                            // Cách 1: Biết tổng tiền vay và số tháng
+                            months = parseInt(l.vayTrongBaoNhieuThang || 0, 10);
+                            schedule = generatePaymentSchedule(totalAmount, monthlyPayment, months, startDate, paymentDay);
+                            endDate = schedule.length ? schedule[schedule.length - 1].date : addMonths(startDate, months);
+                        }
+                        
+                        totalPayment = schedule.reduce((s, it) => s + it.payment, 0);
+                    }
+                    
+                    return {
+                        source,
+                        startDate,
+                        paymentDay,
+                        totalAmount,
+                        monthlyPayment,
+                        months,
+                        note,
+                        schedule,
+                        totalPayment,
+                        endDate,
+                        loanType,
+                        isRemainingPayment: !!(l.soTienConLai && l.ngayKetThucVay) // Flag để biết là cách tính nào
+                    };
+                });
+
+                // Render summary card
+                loansSummary.innerHTML = '';
+                const ul = document.createElement('div');
+                ul.className = 'list-group';
+                processed.forEach((p, idx) => {
+                    let paymentInfo = '';
+                    if (p.loanType === 'mot_lan') {
+                        paymentInfo = `
+                            <div><small class="small-muted">Loại vay</small><div class="badge bg-warning text-dark">Trả một lần</div></div>
+                            <div><small class="small-muted">Ngày phải trả</small><div>${p.endDate.toISOString().slice(0,10)}</div></div>
+                            <div><small class="small-muted">Số tiền phải trả</small><div class="money">${fmtMoney(p.totalPayment)}</div></div>
+                        `;
+                    } else {
+                        if (p.isRemainingPayment) {
+                            paymentInfo = `
+                                <div><small class="small-muted">Loại vay</small><div class="badge bg-success">Còn lại cần trả</div></div>
+                                <div><small class="small-muted">Ngày trả/tháng</small><div>Ngày ${p.paymentDay}</div></div>
+                                <div><small class="small-muted">Số tháng còn lại</small><div>${p.months}</div></div>
+                                <div><small class="small-muted">Trả/tháng</small><div class="money">${fmtMoney(p.monthlyPayment)}</div></div>
+                                <div><small class="small-muted">Số tiền còn lại</small><div class="money text-danger">${fmtMoney(p.totalAmount)}</div></div>
+                            `;
+                        } else {
+                            paymentInfo = `
+                                <div><small class="small-muted">Loại vay</small><div class="badge bg-info">Trả từng tháng</div></div>
+                                <div><small class="small-muted">Ngày trả/tháng</small><div>Ngày ${p.paymentDay}</div></div>
+                                <div><small class="small-muted">Số tháng</small><div>${p.months}</div></div>
+                                <div><small class="small-muted">Trả/tháng</small><div class="money">${fmtMoney(p.monthlyPayment)}</div></div>
+                            `;
+                        }
+                    }
+                    
+                    const html = `
+                        <div class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">${p.source}</h6>
+                            <small>${p.note || ''}</small>
+                        </div>
+                        <div class="d-flex gap-3 mt-2">
+                            <div><small class="small-muted">Ngày bắt đầu</small><div>${p.startDate.toISOString().slice(0,10)}</div></div>
+                            <div><small class="small-muted">Tổng tiền vay</small><div class="money">${fmtMoney(p.totalAmount)}</div></div>
+                            ${paymentInfo}
+                            <div><small class="small-muted">Ngày kết thúc</small><div>${p.endDate.toISOString().slice(0,10)}</div></div>
+                        </div>
+                        </div>
+                    `;
+                    ul.insertAdjacentHTML('beforeend', html);
+                });
+                loansSummary.appendChild(ul);
+                summaryCard.classList.remove('d-none');
+
+                // Build timeline of all payments sorted by due date (nearest to furthest)
+                const allPayments = [];
+                processed.forEach(p => {
+                    p.schedule.forEach(it => {
+                        allPayments.push({
+                            source: p.source,
+                            date: it.date,
+                            payment: it.payment,
+                            remainingAmount: it.remainingAmount,
+                            period: it.period,
+                            totalPeriods: p.months
+                        });
+                    });
+                });
+                
+                // Sort by date (nearest first)
+                allPayments.sort((a, b) => a.date - b.date);
+                
+                // Build combined monthly totals for table display
+                const monthMap = new Map(); // key -> {payment, details: [{source, payment}]}
+                processed.forEach(p => {
+                    p.schedule.forEach(it => {
+                        const key = monthKeyFromDate(it.date);
+                        if (!monthMap.has(key)) monthMap.set(key, {
+                            payment: 0,
+                            details: {}
+                        });
+                        const entry = monthMap.get(key);
+                        entry.payment += it.payment;
+                        // add detail per source
+                        const sKey = p.source;
+                        if (!entry.details[sKey]) entry.details[sKey] = {
+                            source: p.source,
+                            payment: 0
+                        };
+                        entry.details[sKey].payment += it.payment;
+                    });
+                });
+
+                // Sort months ascending
+                const monthsSorted = Array.from(monthMap.keys()).sort();
+
+                // Render timeline table
+                combinedTableBody.innerHTML = '';
+                allPayments.forEach(payment => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${payment.date.toISOString().slice(0,10)}</td>
+                        <td>${payment.source}</td>
+                        <td class="text-end">${fmtMoney(payment.payment)}</td>
+                        <td class="text-end">${fmtMoney(payment.remainingAmount)}</td>
+                        <td class="text-center">${payment.period}/${payment.totalPeriods}</td>
+                    `;
+                    combinedTableBody.appendChild(tr);
+                });
+                combinedCard.classList.remove('d-none');
+
+                // Render amortization accordion
+                accordionLoans.innerHTML = '';
+                processed.forEach((p, idx) => {
+                    const aid = 'loan' + idx;
+                    const card = document.createElement('div');
+                    card.className = 'card mb-2';
+                    const header = document.createElement('div');
+                    header.className = 'card-header';
+                    let headerPaymentInfo = '';
+                    if (p.loanType === 'mot_lan') {
+                        headerPaymentInfo = `
+                            <div class="money">${fmtMoney(p.totalPayment)} <span class="badge bg-warning text-dark ms-1">Một lần</span></div>
+                            <div class="small-muted">Đến hạn: ${p.endDate.toISOString().slice(0,10)}</div>
+                        `;
+                    } else {
+                        if (p.isRemainingPayment) {
+                            headerPaymentInfo = `
+                                <div class="money">${fmtMoney(p.monthlyPayment)} / tháng <span class="badge bg-success ms-1">Còn lại</span></div>
+                                <div class="small-muted">Ngày ${p.paymentDay}/tháng • Còn ${p.months} tháng</div>
+                            `;
+                        } else {
+                            headerPaymentInfo = `
+                                <div class="money">${fmtMoney(p.monthlyPayment)} / tháng <span class="badge bg-info ms-1">Hàng tháng</span></div>
+                                <div class="small-muted">Ngày ${p.paymentDay}/tháng</div>
+                            `;
+                        }
+                    }
+                    
+                    header.innerHTML = `
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                        <div>
+                            <strong>${p.source}</strong>
+                            <div class="small-muted">${p.startDate.toISOString().slice(0,10)} → ${p.endDate.toISOString().slice(0,10)}</div>
+                        </div>
+                        <div class="text-end">
+                            ${headerPaymentInfo}
+                            <div class="small-muted">Tổng vay: ${fmtMoney(p.totalAmount)}</div>
+                            <button class="btn btn-sm btn-outline-primary mt-1" data-bs-toggle="collapse" data-bs-target="#${aid}">Xem chi tiết</button>
+                        </div>
+                        </div>
+                    `;
+                    const bodyWrap = document.createElement('div');
+                    bodyWrap.className = 'collapse';
+                    bodyWrap.id = aid;
+                    const body = document.createElement('div');
+                    body.className = 'card-body';
+                    // table inside
+                    const tb = document.createElement('div');
+                    tb.className = 'table-responsive';
+                    let tableHtml = '';
+                    if (p.loanType === 'mot_lan') {
+                        tableHtml = `
+                            <div class="alert alert-warning">
+                                <h6><i class="fas fa-exclamation-triangle me-2"></i>Khoản vay trả một lần</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>Ngày vay:</strong> ${p.startDate.toISOString().slice(0,10)}<br>
+                                        <strong>Số tiền vay:</strong> ${fmtMoney(p.totalAmount)}<br>
+                                        <strong>Ngày phải trả:</strong> ${p.endDate.toISOString().slice(0,10)}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Số tiền phải trả:</strong> ${fmtMoney(p.totalPayment)}<br>
+                                        <strong>Lãi/phí:</strong> ${fmtMoney(p.totalPayment - p.totalAmount)}<br>
+                                        <strong>Thời gian vay:</strong> ${Math.ceil((p.endDate - p.startDate) / (1000 * 60 * 60 * 24))} ngày
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        tableHtml = `
+                            <table class="table table-sm table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                <th>Kỳ</th>
+                                <th>Ngày trả</th>
+                                <th class="text-end">Số tiền trả</th>
+                                <th class="text-end">Còn lại</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        `;
+                        p.schedule.forEach(it => {
+                            tableHtml += `
+                                <tr>
+                                    <td>${it.period}</td>
+                                    <td>${it.date.toISOString().slice(0,10)}</td>
+                                    <td class="text-end">${fmtMoney(it.payment)}</td>
+                                    <td class="text-end">${fmtMoney(it.remainingAmount)}</td>
+                                </tr>
+                            `;
+                        });
+                        tableHtml += `
+                            </tbody>
+                            </table>
+                        `;
+                    }
+                    tb.innerHTML = tableHtml;
+                    body.appendChild(tb);
+
+                    // footer totals
+                    const foot = document.createElement('div');
+                    foot.className = 'mt-2';
+                    foot.innerHTML = `
+                        <div class="d-flex justify-content-end gap-3">
+                        <div><small class="small-muted">Tổng tiền vay:</small><div class="money">${fmtMoney(p.totalAmount)}</div></div>
+                        <div><small class="small-muted">Tổng đã trả:</small><div class="money">${fmtMoney(p.totalPayment)}</div></div>
+                        <div><small class="small-muted">Chênh lệch:</small><div class="money">${fmtMoney(p.totalPayment - p.totalAmount)}</div></div>
+                        </div>
+                    `;
+                    body.appendChild(foot);
+                    bodyWrap.appendChild(body);
+
+                    card.appendChild(header);
+                    card.appendChild(bodyWrap);
+                    accordionLoans.appendChild(card);
+                });
+                amortizationsCard.classList.remove('d-none');
+
+                // Prepare CSV content for download
+                btnDownloadAllCSV.onclick = function () {
+                    downloadTimelineCSV(allPayments);
+                };
+            }
+
+            function downloadTimelineCSV(allPayments) {
+                const rows = [];
+                rows.push(['Ngày trả', 'Nguồn tiền', 'Số tiền', 'Còn lại', 'Kỳ']);
+                allPayments.forEach(payment => {
+                    rows.push([
+                        payment.date.toISOString().slice(0,10),
+                        payment.source,
+                        Math.round(payment.payment),
+                        Math.round(payment.remainingAmount),
+                        `${payment.period}/${payment.totalPeriods}`
+                    ]);
+                });
+                const csv = rows.map(r => r.map(cell => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\n');
+                const blob = new Blob([csv], {
+                    type: 'text/csv;charset=utf-8;'
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'timeline_payments.csv';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                URL.revokeObjectURL(url);
+            }
+
+            // --- Button handlers ---
+            btnLoad.addEventListener('click', function () {
+                let loans;
+                try {
+                    loans = getLoansFromInput();
+                } catch (e) {
+                    return;
+                }
+                try {
+                    render(loans);
+                } catch (err) {
+                    alert('❌ Lỗi khi xử lý dữ liệu: ' + err.message + '\n\nVui lòng kiểm tra lại thông tin đầu vào.');
+                    console.error(err);
+                }
+            });
+
+            btnUseSample.addEventListener('click', function () {
+                // Restore sample JSON (same as initial block)
+                const sample = [{
+                        "tenNguonTienVay": "MoneyTap",
+                        "ngayBatDauVay": "2025-01-15",
+                        "tongSoTienVay": 5000000,
+                        "loaiVay": "hang_thang",
+                        "ngayPhaiTraTienTrongThang": 15,
+                        "vayTrongBaoNhieuThang": 12,
+                        "moiThangCanTra": 450000,
+                        "ghiChu": "Vay ngân hàng - biết tổng tiền và số tháng"
+                    },
+                    {
+                        "tenNguonTienVay": "Cashwagon",
+                        "ngayBatDauVay": "2025-02-10",
+                        "loaiVay": "hang_thang",
+                        "ngayPhaiTraTienTrongThang": 10,
+                        "ngayKetThucVay": "2025-08-10",
+                        "soTienConLai": 3120000,
+                        "moiThangCanTra": 520000,
+                        "ghiChu": "Vay online - chỉ biết số tiền còn lại và ngày kết thúc"
+                    },
+                    {
+                        "tenNguonTienVay": "Vay bạn bè",
+                        "ngayBatDauVay": "2025-01-20",
+                        "loaiVay": "mot_lan",
+                        "ngayPhaiTra": "2025-04-20",
+                        "soTienPhaiTra": 8500000,
+                        "ghiChu": "Vay bạn bè trả một lần sau 3 tháng"
+                    },
+                    {
+                        "tenNguonTienVay": "Home Credit",
+                        "ngayBatDauVay": "2024-12-01",
+                        "loaiVay": "hang_thang",
+                        "ngayPhaiTraTienTrongThang": 1,
+                        "ngayKetThucVay": "2025-05-01",
+                        "soTienConLai": 1900000,
+                        "moiThangCanTra": 380000,
+                        "ghiChu": "Vay trả góp - đã trả được vài tháng, còn lại 1.9M"
+                    }
+                ];
+                document.getElementById('jsonInput').textContent = JSON.stringify(sample, null, 2);
+            });
+
+            btnPaste.addEventListener('click', async function () {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    if (text) document.getElementById('jsonInput').textContent = text;
+                } catch (err) {
+                    alert('⚠️ Không thể đọc clipboard. Bạn có thể dán trực tiếp vào vùng JSON bằng cách click vào vùng văn bản.');
+                }
+            });
+
+            // Auto-run initial render of sample
+            document.addEventListener('DOMContentLoaded', function () {
+                // trigger initial load
+                btnLoad.click();
+            });
+
+        })();
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
