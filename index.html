@@ -58,6 +58,12 @@
             table-layout: fixed;
             word-wrap: break-word;
         }
+        thead th {
+            position: sticky;
+            top: 0;
+            background: white; /* hoặc bg-light */
+            z-index: 2; /* để header nổi lên trên body */
+        }
     </style>
 </head>
 
@@ -185,8 +191,8 @@
                                     <tr>
                                         <th style="width:120px">Ngày trả</th>
                                         <th style="width:150px">Nguồn tiền</th>
-                                        <th class="text-end" style="width:120px">Số tiền (VND)</th>
-                                        <th class="text-end" style="width:120px">Còn lại (VND)</th>
+                                        <th class="text-end" style="width:120px">Số tiền cần trả</th>
+                                        <th class="text-end" style="width:120px">Còn lại</th>
                                         <th style="width:80px">Kỳ</th>
                                     </tr>
                                 </thead>
